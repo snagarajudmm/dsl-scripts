@@ -1,52 +1,52 @@
-folder('PIPELINE_JOB/CODEADDAGURU') {
+folder('DEVOPS_PROJECT') {
         description('hpsim project foloder created')
 }
-freeStyleJob('PIPELINE_JOB/CODEADDAGURU/compile') {
+freeStyleJob('DEVOPS_PROJECT/compile') {
     logRotator(-1, 10)
     scm {
-        github('NagireddyGuduru/myweb', 'master')
+        github('snagarajudmm/myweb', 'master')
     }
     steps {
         maven('clean compile')
     }
     publishers {
-        downstream('PIPELINE_JOB/CODEADDAGURU/test', 'SUCCESS')
+        downstream('DEVOPS_PROJECT/test', 'SUCCESS')
     }
 }
-mavenJob('PIPELINE_JOB/CODEADDAGURU/test') {
+mavenJob('DEVOPS_PROJECT/test') {
     logRotator(-1, 10)
      scm {
-        github('NagireddyGuduru/myweb', 'master')
+        github('snagarajudmm/myweb', 'master')
     }
     goals('clean test')
    
    publishers {
-        downstream('PIPELINE_JOB/CODEADDAGURU/sonar', 'SUCCESS')
+        downstream('DEVOPS_PROJECT/sonar', 'SUCCESS')
     }
 }
-mavenJob('PIPELINE_JOB/CODEADDAGURU/sonar') {
+mavenJob('DEVOPS_PROJECT/sonar') {
     logRotator(-1, 10)
      scm {
-        github('NagireddyGuduru/myweb', 'master')
+        github('snagarajudmm/myweb', 'master')
     }
     goals('clean sonar:sonar')
   publishers {
-        downstream('PIPELINE_JOB/CODEADDAGURU/nexus', 'SUCCESS')
+        downstream('DEVOPS_PROJECT/nexus', 'SUCCESS')
     }
 }
-mavenJob('PIPELINE_JOB/CODEADDAGURU/nexus') {
+mavenJob('DEVOPS_PROJECT/nexus') {
     logRotator(-1, 10)
      scm {
-        github('NagireddyGuduru/myweb', 'master')
+        github('snagarajudmm/myweb', 'master')
     }
     goals('clean deploy')
 }
-buildPipelineView('PIPELINE_JOB/CODEADDAGURU/build-pipeline') {
+buildPipelineView('DEVOPS_PROJECT/build-pipeline') {
     filterBuildQueue()
     filterExecutors()
     
     displayedBuilds(5)
-    selectedJob('PIPELINE_JOB/CODEADDAGURU/compile')
+    selectedJob('DEVOPS_PROJECT/compile')
     alwaysAllowManualTrigger()
     showPipelineParameters()
     refreshFrequency(60)
