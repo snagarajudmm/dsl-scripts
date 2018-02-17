@@ -40,6 +40,16 @@ mavenJob('DEVOPS_PROJECT/nexus') {
         github('snagarajudmm/myweb', 'master')
     }
     goals('clean deploy')
+        publishers {
+        downstream('DEVOPS_PROJECT/deploy', 'SUCCESS')
+    }
+}
+freeStyleJob('DEVOPS_PROJECT/deploy') {
+   
+    steps {
+        shell('sudo cp /var/lib/jenkins/workspace/DEVOPS_PROJECT/nexus/target/myweb.war /usr/local/tomcat7/webapps')
+    }
+    
 }
 buildPipelineView('DEVOPS_PROJECT/build-pipeline') {
     filterBuildQueue()
