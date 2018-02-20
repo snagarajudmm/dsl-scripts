@@ -47,7 +47,7 @@ mavenJob('DEVOPS_PROJECT/nexus') {
 freeStyleJob('DEVOPS_PROJECT/deploy') {
    
     steps {
-        shell('sudo cp /var/lib/jenkins/workspace/DEVOPS_PROJECT/nexus/target/myweb.war /usr/local/tomcat7/webapps')
+        shell('sudo cp /var/lib/jenkins/workspace/DEVOPS_PROJECT/nexus/target/myweb.war /home/ec2-user/tomcat8/webapps')
     }
     
 }
