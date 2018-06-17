@@ -1,5 +1,5 @@
 folder('DEVOPS_PROJECT') {
-        description('hpsim project foloder created')
+        description('Benzworkflow project foloder created')
 }
 freeStyleJob('DEVOPS_PROJECT/compile') {
     logRotator(-1, 10)
